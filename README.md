@@ -1,7 +1,7 @@
 spring-boot-starter-rocketmq
 ===================================
 
-[English](https://github.com/AlittleBitch/spring-boot-starter-rocketmq/blob/master/README.md)
+[chinese](https://github.com/AlittleBitch/spring-boot-starter-rocketmq/master/README.md)
 
 spring-boot-starter-rockermq。
 
