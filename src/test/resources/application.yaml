@@ -1,0 +1,9 @@
+spring:
+  mq:
+    rocket:
+      config:
+        namesrv-addr: 192.168.2.26:9876
+        instance-name: te
+      consumer:
+        group: testGroup
+        consume-from-where: consume_from_first_offset
