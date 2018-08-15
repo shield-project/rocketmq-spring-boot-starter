@@ -7,3 +7,4 @@ spring-boot-starter-rockermq。
 
 支持jdk版本为1.8
 
+Demo可参考test包下，稍后会继续补充使用文档。
