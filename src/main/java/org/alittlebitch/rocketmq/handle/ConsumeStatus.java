@@ -1,4 +1,4 @@
-package org.alittlebitch.rocketmq.receive;
+package org.alittlebitch.rocketmq.handle;
 
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;

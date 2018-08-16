@@ -1,4 +1,4 @@
-package org.alittlebitch.rocketmq.receive;
+package org.alittlebitch.rocketmq.context;
 
 import org.apache.rocketmq.common.message.MessageQueue;
 

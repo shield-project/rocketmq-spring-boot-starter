@@ -1,9 +1,9 @@
 package org.alittlebitch.rocketmq.test;
 
 import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
-import org.alittlebitch.rocketmq.receive.AbstractMessageListener;
-import org.alittlebitch.rocketmq.receive.ConsumeContextConcurrently;
-import org.alittlebitch.rocketmq.receive.ConsumeStatus;
+import org.alittlebitch.rocketmq.listener.AbstractMessageListener;
+import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
+import org.alittlebitch.rocketmq.handle.ConsumeStatus;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;

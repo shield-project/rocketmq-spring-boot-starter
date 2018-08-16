@@ -6,9 +6,7 @@
     <groupId>org.alittlebitch.rocketmq</groupId>
     <artifactId>rocketmq-spring-boot-starter</artifactId>
     <version>1.0.0</version>
-
     <packaging>jar</packaging>
-
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
@@ -69,9 +67,6 @@
                     <source>1.8</source>
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
-                    <compilerArgs>
-                        <arg>-XDignore.symbol.file</arg>
-                    </compilerArgs>
                     <fork>true</fork>
                 </configuration>
             </plugin>

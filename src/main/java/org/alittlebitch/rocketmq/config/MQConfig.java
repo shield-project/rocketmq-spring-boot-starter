@@ -1,6 +1,6 @@
 package org.alittlebitch.rocketmq.config;
 
-import org.alittlebitch.rocketmq.receive.MessageRecevieHandler;
+import org.alittlebitch.rocketmq.handle.MessageRecevieHandler;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
