@@ -1,25 +1,15 @@
 package org.alittlebitch.rocketmq.config;
 
-import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
-import org.alittlebitch.rocketmq.annotation.ConsumerConfigProperty;
-import org.alittlebitch.rocketmq.enums.ConsumeMode;
-import org.alittlebitch.rocketmq.receive.MQMessageListener;
 import org.alittlebitch.rocketmq.receive.MessageRecevieHandler;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
 import org.apache.rocketmq.client.producer.MQProducer;
-import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-
-import java.lang.reflect.Method;
-import java.util.List;
-import java.util.Objects;
 
 /**
  * @author ShawnShoper
@@ -30,24 +20,6 @@ import java.util.Objects;
 public class MQConfig {
     @Autowired
     MQProperties mqProperties;
-
-    @Bean
-    @ConditionalOnMissingBean(ConsumerConfigProperty.class)
-    public ConsumerConfigProperty produceConfigProperty(@Autowired(required = false) MQMessageListener mqMessageListener) throws NoSuchMethodException {
-        ConsumerConfigProperty produceConfigProperty = new ConsumerConfigProperty();
-        if (Objects.nonNull(mqMessageListener)) {
-            Method consume = mqMessageListener.getClass().getDeclaredMethod("consume", List.class, ConsumeConcurrentlyContext.class);
-            ConsumerConfig annotation = consume.getAnnotation(ConsumerConfig.class);
-            if (Objects.nonNull(annotation)) {
-                String topic = annotation.topic();
-                String tags = annotation.tags();
-                ConsumeMode consumeMode = annotation.consumeMode();
-                ConsumeFromWhere consumeFromWhere = annotation.consumeFromWhere();
-                produceConfigProperty.updateInstance(topic, tags, consumeMode, consumeFromWhere);
-            }
-        }
-        return produceConfigProperty;
-    }
 
     @Bean
     @ConditionalOnMissingBean(MQProducer.class)

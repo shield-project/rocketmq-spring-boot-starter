@@ -1,7 +1,6 @@
 package org.alittlebitch.rocketmq.annotation;
 
 import org.alittlebitch.rocketmq.enums.ConsumeMode;
-import org.alittlebitch.rocketmq.enums.ListenerType;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 
 import java.lang.annotation.*;
@@ -19,8 +18,6 @@ public @interface ConsumerConfig {
     String topic() default "DEFAULT";
 
     String tags();
-
-    ListenerType listenerType() default ListenerType.Concurrently;
 
     ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
 
