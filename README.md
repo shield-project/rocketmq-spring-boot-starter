@@ -19,8 +19,8 @@ rocketmq-spring-boot-starter
 
 ```xml
     <dependency>
-		<groupId>org.alittlebitch.rocketmq</groupId>
-		<artifactId>rocketmq-spring-boot-starter</artifactId>
+  		<groupId>org.alittlebitch.rocketmq</groupId>
+  		<artifactId>rocketmq-spring-boot-starter</artifactId>
     	<version>1.0.0</version>
     </dependency>
 ```
