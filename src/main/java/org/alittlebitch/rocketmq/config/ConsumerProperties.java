@@ -2,7 +2,6 @@ package org.alittlebitch.rocketmq.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.apache.rocketmq.client.consumer.AllocateMessageQueueStrategy;
 import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.client.consumer.store.OffsetStore;
 import org.apache.rocketmq.common.UtilAll;

@@ -23,7 +23,7 @@ public class MessageListener extends AbstractMessageListener<ConsumeContextConcu
     public ConsumeStatus consumeMessage(List<MessageExt> msgs, ConsumeContextConcurrently context) {
         try {
             String message = new String(msgs.get(0).getBody(), "UTF-8");
-            System.out.println(new String(message)+System.currentTimeMillis());
+            System.out.println(new String(message) + System.currentTimeMillis());
             return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.CONSUME_SUCCESS);
         } catch (UnsupportedEncodingException e) {
             System.out.println(".........");

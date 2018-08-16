@@ -1,6 +1,5 @@
 package org.alittlebitch.rocketmq.annotation;
 
-import org.alittlebitch.rocketmq.enums.ConsumeMode;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 
 import java.lang.annotation.*;
@@ -21,6 +20,6 @@ public @interface ConsumerConfig {
 
     ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
 
-    //    boolean autoCommit() default true;
-    ConsumeMode consumeMode() default ConsumeMode.CONCURRENTLY;
+//    //    boolean autoCommit() default true;
+//    ConsumeMode consumeMode() default ConsumeMode.CONCURRENTLY;
 }

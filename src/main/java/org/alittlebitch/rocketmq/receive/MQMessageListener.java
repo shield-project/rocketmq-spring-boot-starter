@@ -9,7 +9,7 @@ import java.util.List;
  * @date 2018/7/26 11:41
  */
 public abstract class MQMessageListener {
-    public Object consume(List<MessageExt> msgs, Object context){
+    public Object consume(List<MessageExt> msgs, Object context) {
         return null;
     }
 }

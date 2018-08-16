@@ -2,7 +2,6 @@ package org.alittlebitch.rocketmq.receive;
 
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
-import org.springframework.util.Assert;
 
 import java.util.Objects;
 
@@ -44,7 +43,8 @@ public class ConsumeStatus {
         this.consumeOrderlyStatus = consumeOrderlyStatus;
         return this;
     }
-    private void assertNull(Object consumeStatus){
+
+    private void assertNull(Object consumeStatus) {
         if (Objects.isNull(consumeStatus))
             throw new RuntimeException("Return status can not be null");
     }

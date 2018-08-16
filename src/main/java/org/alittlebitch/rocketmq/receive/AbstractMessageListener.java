@@ -1,7 +1,7 @@
 package org.alittlebitch.rocketmq.receive;
 
-import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
 import lombok.extern.log4j.Log4j;
+import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;

@@ -2,7 +2,6 @@ package org.alittlebitch.rocketmq.annotation;
 
 import org.alittlebitch.rocketmq.config.MQConfig;
 import org.springframework.context.annotation.Import;
-import org.springframework.scheduling.annotation.SchedulingConfiguration;
 
 import java.lang.annotation.*;
 

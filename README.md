@@ -1,15 +1,13 @@
-spring-boot-starter-rocketmq
+rocketmq-spring-boot-starter
 ===================================
 
 [chinese](https://github.com/AlittleBitch/spring-boot-starter-rocketmq/blob/master/README.md)
-
-spring-boot-starter-rockermq。
 
 * 支持jdk版本为1.8
 * SpringBoot版本为1.5.6
 * maven仓库地址[新aliyun maven](https://maven.aliyun.com/repository/public)
 
-### 如何运行spring-boot-starter-RocketMQ
+### 如何运行rocketmq-spring-boot-starter
 
 * 构建项目
 
@@ -22,7 +20,7 @@ spring-boot-starter-rockermq。
 ```xml
     <dependency>
 		<groupId>org.alittlebitch.rocketmq</groupId>
-		<artifactId>spring-boot-starter-rocketmq</artifactId>
+		<artifactId>rocketmq-spring-boot-starter</artifactId>
     	<version>1.0.0</version>
     </dependency>
 ```

@@ -46,7 +46,7 @@ public class MQBuilder {
     }
 
     public static void consumer() throws Exception {
-        DefaultMQPushConsumer  consumer = new DefaultMQPushConsumer("tes11t");
+        DefaultMQPushConsumer consumer = new DefaultMQPushConsumer("tes11t");
         consumer.setNamesrvAddr("192.168.2.26:9876");
         consumer.setConsumeFromWhere(ConsumeFromWhere.CONSUME_FROM_FIRST_OFFSET);
         consumer.subscribe("test", "test");
@@ -54,6 +54,7 @@ public class MQBuilder {
         consumer.registerMessageListener(new MessageListenerOrderly() {
 
             AtomicLong consumeTimes = new AtomicLong(0);
+
             @Override
             public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs,
                                                        ConsumeOrderlyContext context) {
@@ -61,7 +62,7 @@ public class MQBuilder {
                 System.out.println(Thread.currentThread().getName() + " Receive New Messages: " + msgs + "%n");
                 this.consumeTimes.incrementAndGet();
 //                if ((this.consumeTimes.get() % 2) == 0) {
-                    return ConsumeOrderlyStatus.COMMIT;
+                return ConsumeOrderlyStatus.COMMIT;
 //                } else if ((this.consumeTimes.get() % 3) == 0) {
 //                    return ConsumeOrderlyStatus.ROLLBACK;
 //                } else if ((this.consumeTimes.get() % 4) == 0) {
