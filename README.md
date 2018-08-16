@@ -6,6 +6,8 @@ spring-boot-starter-rocketmq
 spring-boot-starter-rockermq。
 
 支持jdk版本为1.8
+SpringBoot版本为1.5.6
+maven仓库地址[新aliyun maven](https://maven.aliyun.com/repository/public)
 
 ### 如何运行spring-boot-starter-RocketMQ
 
