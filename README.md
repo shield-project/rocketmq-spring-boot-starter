@@ -1,7 +1,7 @@
 rocketmq-spring-boot-starter
 ===================================
 
-[chinese](https://github.com/AlittleBitch/spring-boot-starter-rocketmq/blob/master/README.md)
+[chinese](https://github.com/AlittleBitch/rocketmq-spring-boot-starter/blob/master/README.md)
 
 * 支持jdk版本为1.8
 * SpringBoot版本为1.5.6
