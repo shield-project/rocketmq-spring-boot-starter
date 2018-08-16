@@ -35,6 +35,8 @@ rocketmq-spring-boot-starter
 	      config:
 	        namesrv-addr: 192.168.2.26:9876
 	        instance-name: test
+	      consumer:
+            group: testGroup
 ```
 config配置可以参考rocketMQ自带的config配置进行补充。
 
