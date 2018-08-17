@@ -10,8 +10,11 @@ import java.util.Objects;
  * @date 2018/8/15 11:07
  */
 public class ConsumeStatus {
+
     private int token;
+
     private ConsumeConcurrentlyStatus consumeConcurrentlyStatus;
+
     private ConsumeOrderlyStatus consumeOrderlyStatus;
 
     public static ConsumeStatus custom() {
@@ -27,10 +30,14 @@ public class ConsumeStatus {
     }
 
     public ConsumeStatus setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus consumeConcurrentlyStatus) {
+
         assertNull(consumeConcurrentlyStatus);
+
         this.token = 0x01;
         this.consumeConcurrentlyStatus = consumeConcurrentlyStatus;
+
         return this;
+
     }
 
     public ConsumeOrderlyStatus getConsumeOrderlyStatus() {
@@ -38,14 +45,20 @@ public class ConsumeStatus {
     }
 
     public ConsumeStatus setConsumeOrderlyStatus(ConsumeOrderlyStatus consumeOrderlyStatus) {
+
         assertNull(consumeOrderlyStatus);
+
         this.token = 0x02;
         this.consumeOrderlyStatus = consumeOrderlyStatus;
+
         return this;
+
     }
 
     private void assertNull(Object consumeStatus) {
+
         if (Objects.isNull(consumeStatus))
             throw new RuntimeException("Return status can not be null");
+
     }
 }

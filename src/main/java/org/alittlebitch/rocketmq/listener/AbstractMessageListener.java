@@ -29,6 +29,7 @@ import java.util.List;
  */
 @Log4j
 public abstract class AbstractMessageListener<T extends ConsumeContext> {
+
     @Autowired
     DefaultMQPushConsumer mqConsumer;
     @Autowired
@@ -36,10 +37,13 @@ public abstract class AbstractMessageListener<T extends ConsumeContext> {
 
     @PostConstruct
     public void init() throws MQClientException, NoSuchMethodException {
+
         ConsumerConfig consumerConfig = getConsumerConfig();
-        String topic = consumerConfig.topic();
         ConsumeFromWhere consumeFromWhere = consumerConfig.consumeFromWhere();
+
+        String topic = consumerConfig.topic();
         String tags = consumerConfig.tags();
+
         //获取实际处理listener
         Class<T> actualListener = getActualListener();
 
@@ -52,7 +56,9 @@ public abstract class AbstractMessageListener<T extends ConsumeContext> {
 
         mqConsumer.subscribe(topic, tags);
         mqConsumer.setConsumeFromWhere(consumeFromWhere);
+
         mqConsumer.start();
+
     }
 
     private ConsumerConfig getConsumerConfig() throws NoSuchMethodException {
@@ -61,32 +67,47 @@ public abstract class AbstractMessageListener<T extends ConsumeContext> {
     }
 
     private ConsumeOrderlyStatus messageHandle4Orderly(List<MessageExt> msgs, ConsumeOrderlyContext context) {
+
         T consumeContext = messageRecevieHandler.messageHandle(msgs, context, ConsumeContextOrderly.class);
+
         ConsumeStatus consumeStatus = consumeMessage(msgs, consumeContext);
+
         if (consumeStatus.getToken() == 0x02)
             return consumeStatus.getConsumeOrderlyStatus();
         else
             return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
+
     }
 
     private ConsumeConcurrentlyStatus messageHandle4Concurrently(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
+
         T consumeContext = messageRecevieHandler.messageHandle(msgs, context, ConsumeContextConcurrently.class);
+
         ConsumeStatus consumeStatus = consumeMessage(msgs, consumeContext);
+
         if (consumeStatus.getToken() == 0x01)
             return consumeStatus.getConsumeConcurrentlyStatus();
         else
             return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+
     }
 
     protected Class getActualListener() {
+
         final Class<? extends AbstractMessageListener> classz = this.getClass();
+
         Type t = classz.getGenericSuperclass();
+
         Class actualClass = null;
+
         if (t instanceof ParameterizedType) {
+
             Type[] args = ((ParameterizedType) t).getActualTypeArguments();
+
             if (args[0] instanceof Class) {
                 actualClass = (Class<T>) args[0];
             }
+
         }
         return actualClass;
     }

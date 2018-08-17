@@ -18,6 +18,7 @@ import java.util.Map;
 @Setter
 @Getter
 public class ConsumerProperties {
+
     private String group;
 
     /**

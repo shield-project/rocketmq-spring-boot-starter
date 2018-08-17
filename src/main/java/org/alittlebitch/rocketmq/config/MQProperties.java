@@ -14,10 +14,14 @@ import org.springframework.boot.context.properties.NestedConfigurationProperty;
 @Setter
 @ConfigurationProperties(prefix = "spring.mq.rocket")
 public class MQProperties {
+
     @NestedConfigurationProperty
     private ClientConfig config = new ClientConfig();
+
     @NestedConfigurationProperty
     private ProducerProperties producer = new ProducerProperties();
+
     @NestedConfigurationProperty
     private ConsumerProperties consumer = new ConsumerProperties();
+
 }

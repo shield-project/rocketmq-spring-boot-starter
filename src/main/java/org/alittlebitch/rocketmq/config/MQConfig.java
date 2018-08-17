@@ -18,14 +18,19 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @EnableConfigurationProperties(MQProperties.class)
 public class MQConfig {
+
     @Autowired
     MQProperties mqProperties;
 
     @Bean
     @ConditionalOnMissingBean(MQProducer.class)
     public MQProducer mqProducer() throws MQClientException {
+
         ProducerProperties producerProperties = mqProperties.getProducer();
+
+        // default producer
         DefaultMQProducer defaultMQProducer = new DefaultMQProducer();
+
         defaultMQProducer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
         defaultMQProducer.setCompressMsgBodyOverHowmuch(producerProperties.getCompressMsgBodyOverHowmuch());
         defaultMQProducer.setSendMessageWithVIPChannel(mqProperties.getConfig().isVipChannelEnabled());
@@ -35,14 +40,20 @@ public class MQConfig {
         defaultMQProducer.setMaxMessageSize(producerProperties.getMaxMessageSize());
         defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(producerProperties.isRetryAnotherBrokerWhenNotStoreOK());
         defaultMQProducer.setRetryTimesWhenSendAsyncFailed(producerProperties.getRetryTimesWhenSendAsyncFailed());
+
         defaultMQProducer.start();
+
         return defaultMQProducer;
+
     }
 
     @Bean
     @ConditionalOnMissingBean(DefaultMQPushConsumer.class)
     public DefaultMQPushConsumer mqConsumer() {
+
+        // default consumer
         DefaultMQPushConsumer mqConsumer = new DefaultMQPushConsumer();
+
         mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
         mqConsumer.setConsumeFromWhere(mqProperties.getConsumer().getConsumeFromWhere());
         mqConsumer.setConsumerGroup(mqProperties.getConsumer().getGroup());
@@ -52,10 +63,11 @@ public class MQConfig {
 //        mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
 //        ConsumerProperties consumerProperties = mqProperties.getConsumer();
 //        mqConsumer.setConsumerGroup(consumerProperties.getGroup());
-////        mqConsumer.setAdjustThreadPoolNumsThreshold(consumerProperties.getAdjustThreadPoolNumsThreshold());
-////        mqConsumer.setConsumeConcurrentlyMaxSpan(consumerProperties.getConsumeConcurrentlyMaxSpan());
+//        mqConsumer.setAdjustThreadPoolNumsThreshold(consumerProperties.getAdjustThreadPoolNumsThreshold());
+//        mqConsumer.setConsumeConcurrentlyMaxSpan(consumerProperties.getConsumeConcurrentlyMaxSpan());
 //        mqConsumer.setConsumeFromWhere(consumerConfigProperty.getConsumeFromWhere());
 //        mqConsumer.setConsumeMessageBatchMaxSize(consumerProperties.getConsumeMessageBatchMaxSize());
+
         return mqConsumer;
     }
 

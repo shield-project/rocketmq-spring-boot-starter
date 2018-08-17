@@ -7,7 +7,9 @@ import org.apache.rocketmq.common.message.MessageQueue;
  * @date 2018/8/14 15:41
  */
 public class ConsumeContextOrderly extends ConsumeContext {
+
     private boolean autoCommit = true;
+
     private long suspendCurrentQueueTimeMillis = -1;
 
     public ConsumeContextOrderly(MessageQueue messageQueue) {

@@ -14,10 +14,23 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface ConsumerConfig {
+
+    /**
+     * topic name of consumer target
+     * @return
+     */
     String topic() default "DEFAULT";
 
+    /**
+     * tag name of target topic
+     * @return
+     */
     String tags();
 
+    /**
+     * consumer position offset
+     * @return
+     */
     ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
 
 //    //    boolean autoCommit() default true;

@@ -14,6 +14,7 @@ public class ConsumeContextConcurrently extends ConsumeContext {
      * >0,client control retry frequency
      */
     private int delayLevelWhenNextConsume = 0;
+
     private int ackIndex = Integer.MAX_VALUE;
 
     public ConsumeContextConcurrently(MessageQueue messageQueue) {

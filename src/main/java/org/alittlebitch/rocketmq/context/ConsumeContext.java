@@ -7,6 +7,7 @@ import org.apache.rocketmq.common.message.MessageQueue;
  * @date 2018/8/14 15:42
  */
 public abstract class ConsumeContext<T> {
+
     private final MessageQueue messageQueue;
 
     public ConsumeContext(MessageQueue messageQueue) {
@@ -16,4 +17,5 @@ public abstract class ConsumeContext<T> {
     public MessageQueue getMessageQueue() {
         return messageQueue;
     }
+
 }

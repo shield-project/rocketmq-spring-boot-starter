@@ -10,10 +10,12 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ProducerProperties {
+
     /**
      * The group name of producer
      */
     private String group = "DEFAULT";
+
     /**
      * Number of queues to create per default topic.
      */
@@ -52,6 +54,7 @@ public class ProducerProperties {
 
     /**
      * Maximum allowed message size in bytes.
+     * max = 4 * 1024 * 1024
      */
-    private int maxMessageSize = 1024 * 1024 * 4; // 4M
+    private int maxMessageSize = 1024 * 1024 * 4;
 }
