@@ -20,7 +20,7 @@ rocketmq-spring-boot-starter
 
 ```xml
     <dependency>
-        <groupId>org.shieldproject.rocketmq</groupId>
+        <groupId>org.shieldproject.mq</groupId>
         <artifactId>rocketmq-spring-boot-starter</artifactId>
         <version>1.0.0</version>
     </dependency>
