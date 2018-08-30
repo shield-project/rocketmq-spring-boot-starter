@@ -1,7 +1,7 @@
 package org.alittlebitch.rocketmq.listener;
 
 import lombok.extern.log4j.Log4j;
-import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
+import org.alittlebitch.rocketmq.annotation.RocketMQListener;
 import org.alittlebitch.rocketmq.context.ConsumeContext;
 import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
 import org.alittlebitch.rocketmq.context.ConsumeContextOrderly;
@@ -38,7 +38,7 @@ public abstract class AbstractMessageListener<T extends ConsumeContext> {
     @PostConstruct
     public void init() throws MQClientException, NoSuchMethodException {
 
-        ConsumerConfig consumerConfig = getConsumerConfig();
+        RocketMQListener consumerConfig = getConsumerConfig();
         ConsumeFromWhere consumeFromWhere = consumerConfig.consumeFromWhere();
 
         String topic = consumerConfig.topic();
@@ -61,9 +61,9 @@ public abstract class AbstractMessageListener<T extends ConsumeContext> {
 
     }
 
-    private ConsumerConfig getConsumerConfig() throws NoSuchMethodException {
+    private RocketMQListener getConsumerConfig() throws NoSuchMethodException {
         Method consumeMessage = this.getClass().getDeclaredMethod("consumeMessage", List.class, ConsumeContext.class);
-        return consumeMessage.getAnnotation(ConsumerConfig.class);
+        return consumeMessage.getAnnotation(RocketMQListener.class);
     }
 
     private ConsumeOrderlyStatus messageHandle4Orderly(List<MessageExt> msgs, ConsumeOrderlyContext context) {

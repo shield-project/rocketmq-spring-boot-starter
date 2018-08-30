@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>org.shieldproject.mq</groupId>
     <artifactId>rocketmq-spring-boot-starter</artifactId>
-    <version>1.0.0</version>
+    <version>1.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>

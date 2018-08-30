@@ -1,9 +1,9 @@
 package org.alittlebitch.rocketmq.test;
 
-import org.alittlebitch.rocketmq.annotation.ConsumerConfig;
-import org.alittlebitch.rocketmq.listener.AbstractMessageListener;
+import org.alittlebitch.rocketmq.annotation.RocketMQListener;
 import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
 import org.alittlebitch.rocketmq.handle.ConsumeStatus;
+import org.alittlebitch.rocketmq.listener.AbstractMessageListener;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
@@ -19,14 +19,13 @@ import java.util.List;
 @Component
 public class MessageListener extends AbstractMessageListener<ConsumeContextConcurrently> {
     @Override
-    @ConsumerConfig(topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
+    @RocketMQListener(topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
     public ConsumeStatus consumeMessage(List<MessageExt> msgs, ConsumeContextConcurrently context) {
         try {
             String message = new String(msgs.get(0).getBody(), "UTF-8");
             System.out.println(new String(message) + System.currentTimeMillis());
             return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.CONSUME_SUCCESS);
         } catch (UnsupportedEncodingException e) {
-            System.out.println(".........");
             e.printStackTrace();
             return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.RECONSUME_LATER);
         }

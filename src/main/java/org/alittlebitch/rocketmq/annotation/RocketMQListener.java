@@ -13,7 +13,7 @@ import java.lang.annotation.*;
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
-public @interface ConsumerConfig {
+public @interface RocketMQListener {
 
     /**
      * topic name of consumer target
