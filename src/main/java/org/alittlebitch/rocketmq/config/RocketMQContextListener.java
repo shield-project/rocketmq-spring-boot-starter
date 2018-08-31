@@ -37,7 +37,7 @@ public class RocketMQContextListener implements BeanPostProcessor {
             rocketMQMappingBean.setMethod(key);
             rocketMQMappingBean.setRocketMQListener(value);
             return rocketMQMappingBean;
-        }).forEach(e -> RocketMQMappingStore.getRocketmqMappingBeans().add(e));
+        }).forEach(RocketMQMappingStore.getRocketmqMappingBeans()::add);
         return bean;
     }
 
