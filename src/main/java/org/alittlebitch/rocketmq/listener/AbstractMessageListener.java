@@ -2,9 +2,6 @@ package org.alittlebitch.rocketmq.listener;
 
 import lombok.extern.log4j.Log4j;
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
-import org.alittlebitch.rocketmq.context.ConsumeContext;
-import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
-import org.alittlebitch.rocketmq.context.ConsumeContextOrderly;
 import org.alittlebitch.rocketmq.handle.ConsumeStatus;
 import org.alittlebitch.rocketmq.handle.MessageRecevieHandler;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;

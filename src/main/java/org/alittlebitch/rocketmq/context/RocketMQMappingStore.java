@@ -1,6 +1,6 @@
 package org.alittlebitch.rocketmq.context;
 
-import org.alittlebitch.rocketmq.bean.RocketMQMappingBean;
+import org.alittlebitch.rocketmq.factory.RocketMQMappingBean;
 
 import java.util.ArrayList;
 import java.util.List;

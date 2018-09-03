@@ -14,24 +14,43 @@ import java.lang.annotation.*;
 @Retention(RetentionPolicy.RUNTIME)
 @Documented
 public @interface RocketMQListener {
+    /**
+     * client instance name.it will be rewrite by config file.
+     *
+     * @return
+     */
+    String instance();
 
     /**
      * topic name of consumer target
+     *
      * @return
      */
     String topic() default "DEFAULT";
 
     /**
      * tag name of target topic
+     *
      * @return
      */
     String tags();
 
     /**
+     * group name of target client consumer client
+     *
+     * @return
+     */
+    String group();
+
+    /**
      * consumer position offset
+     *
      * @return
      */
     ConsumeFromWhere consumeFromWhere() default ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET;
+
+    ConsumeContext consumeContext() default ConsumeContext.Orderly;
+
 
 //    //    boolean autoCommit() default true;
 //    ConsumeMode consumeMode() default ConsumeMode.CONCURRENTLY;

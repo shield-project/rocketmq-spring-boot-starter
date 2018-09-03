@@ -1,8 +1,8 @@
 package org.alittlebitch.rocketmq.config;
 
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
-import org.alittlebitch.rocketmq.bean.RocketMQMappingBean;
 import org.alittlebitch.rocketmq.context.RocketMQMappingStore;
+import org.alittlebitch.rocketmq.factory.RocketMQMappingBean;
 import org.springframework.aop.support.AopUtils;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.config.BeanPostProcessor;

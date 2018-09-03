@@ -1,8 +1,5 @@
 package org.alittlebitch.rocketmq.handle;
 
-import org.alittlebitch.rocketmq.context.ConsumeContext;
-import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
-import org.alittlebitch.rocketmq.context.ConsumeContextOrderly;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.common.message.MessageExt;

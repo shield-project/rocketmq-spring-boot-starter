@@ -1,4 +1,4 @@
-package org.alittlebitch.rocketmq.bean;
+package org.alittlebitch.rocketmq.factory;
 
 import lombok.Data;
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;

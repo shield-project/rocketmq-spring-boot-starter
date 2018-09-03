@@ -102,7 +102,7 @@ public class ConsumerProperties {
     private int consumeThreadMax = 64;
 
     /**
-     * Threshold for dynamic adjustment of the number of thread pool
+     * Threshold for dynamic adjustment of the number of thread factory
      */
     private long adjustThreadPoolNumsThreshold = 100000;
 

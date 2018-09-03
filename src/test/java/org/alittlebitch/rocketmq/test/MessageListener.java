@@ -1,9 +1,7 @@
 package org.alittlebitch.rocketmq.test;
 
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
-import org.alittlebitch.rocketmq.context.ConsumeContextConcurrently;
 import org.alittlebitch.rocketmq.handle.ConsumeStatus;
-import org.alittlebitch.rocketmq.listener.AbstractMessageListener;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.apache.rocketmq.common.message.MessageExt;
@@ -17,10 +15,9 @@ import java.util.List;
  * @date 2018/7/30 11:34
  */
 @Component
-public class MessageListener extends AbstractMessageListener<ConsumeContextConcurrently> {
-    @Override
+public class MessageListener {
     @RocketMQListener(topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
-    public ConsumeStatus consumeMessage(List<MessageExt> msgs, ConsumeContextConcurrently context) {
+    public ConsumeStatus consumeMessage(List<MessageExt> msgs) {
         try {
             String message = new String(msgs.get(0).getBody(), "UTF-8");
             System.out.println(new String(message) + System.currentTimeMillis());
