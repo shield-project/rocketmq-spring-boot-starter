@@ -23,7 +23,6 @@ public class MQClientInstance {
         if (!StringUtils.isEmpty(rocketMQListener.group()))
             defaultMQPushConsumer.setConsumerGroup(rocketMQListener.group());
 //        defaultMQPushConsumer.sub();
-
         return defaultMQPushConsumer;
     }
 }
