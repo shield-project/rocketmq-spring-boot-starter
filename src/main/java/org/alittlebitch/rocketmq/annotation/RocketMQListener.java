@@ -19,7 +19,7 @@ public @interface RocketMQListener {
      *
      * @return
      */
-    String instance();
+    String instance() default "DEFAULT_INSTANCE";
 
     /**
      * topic name of consumer target
@@ -40,7 +40,7 @@ public @interface RocketMQListener {
      *
      * @return
      */
-    String group();
+    String group() default "DEFAULT_GROUP";
 
     /**
      * consumer position offset

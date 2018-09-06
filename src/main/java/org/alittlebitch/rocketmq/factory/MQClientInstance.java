@@ -1,7 +1,6 @@
 package org.alittlebitch.rocketmq.factory;
 
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
-import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -14,14 +13,14 @@ import java.lang.reflect.Method;
 @Component
 public class MQClientInstance {
 
-    public DefaultMQPushConsumer createInstance(Object bean, Method method, RocketMQListener rocketMQListener) {
+    public MQConsumer createInstance(Object bean, Method method, RocketMQListener rocketMQListener) {
         String instance = rocketMQListener.instance();
         if (StringUtils.isEmpty(instance))
             throw new NullPointerException("Instance name can not be null or empty");
-        DefaultMQPushConsumer defaultMQPushConsumer = MQClientFactory.get(instance);
-        defaultMQPushConsumer.setInstanceName(instance);
-        if (!StringUtils.isEmpty(rocketMQListener.group()))
-            defaultMQPushConsumer.setConsumerGroup(rocketMQListener.group());
+        MQConsumer defaultMQPushConsumer = MQClientFactory.get(instance);
+//        defaultMQPushConsumer.setInstanceName(instance);
+//        if (!StringUtils.isEmpty(rocketMQListener.group()))
+//            defaultMQPushConsumer.setConsumerGroup(rocketMQListener.group());
 //        defaultMQPushConsumer.sub();
         return defaultMQPushConsumer;
     }

@@ -1,6 +1,5 @@
 package org.alittlebitch.rocketmq.config;
 
-import org.alittlebitch.rocketmq.handle.MessageRecevieHandler;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.client.producer.DefaultMQProducer;
@@ -57,7 +56,6 @@ public class MQConfig {
         mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
         mqConsumer.setConsumeFromWhere(mqProperties.getConsumer().getConsumeFromWhere());
         mqConsumer.setConsumerGroup(mqProperties.getConsumer().getGroup());
-
 //        mqConsumer.subscribe("test", "test");
 //        mqConsumer.subscribe(consumerConfigProperty.getTopic(), consumerConfigProperty.getTags());
 //        mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
@@ -69,10 +67,5 @@ public class MQConfig {
 //        mqConsumer.setConsumeMessageBatchMaxSize(consumerProperties.getConsumeMessageBatchMaxSize());
 
         return mqConsumer;
-    }
-
-    @Bean
-    public MessageRecevieHandler messageRecevieHandler() {
-        return new MessageRecevieHandler();
     }
 }
