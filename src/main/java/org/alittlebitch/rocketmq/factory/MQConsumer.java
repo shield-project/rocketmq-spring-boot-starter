@@ -4,6 +4,7 @@ import org.alittlebitch.rocketmq.annotation.RocketMQListener;
 import org.alittlebitch.rocketmq.config.ConsumerProperties;
 import org.apache.rocketmq.client.ClientConfig;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
+import org.apache.rocketmq.client.consumer.listener.MessageListener;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.springframework.util.StringUtils;
 
@@ -27,6 +28,10 @@ public class MQConsumer {
         return mqConsumer;
     }
 
+    public MQConsumer listener(MessageListener messageListener) {
+        mqPushConsumer.setMessageListener(messageListener);
+        return this;
+    }
     public MQConsumer config(ClientConfig clientConfig, ConsumerProperties consumerProperties, RocketMQListener rocketMQListener) {
         mqPushConsumer.setNamesrvAddr(StringUtils.isEmpty(clientConfig.getNamesrvAddr()) ? DEFAULT_NAME_SRV_ADDR : clientConfig.getNamesrvAddr());
         mqPushConsumer.setInstanceName(StringUtils.isEmpty(rocketMQListener.instance()) ? clientConfig.getInstanceName() : rocketMQListener.instance());
