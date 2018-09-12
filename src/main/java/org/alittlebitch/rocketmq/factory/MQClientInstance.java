@@ -7,8 +7,6 @@ import org.alittlebitch.rocketmq.listener.ConcurrentlyListener;
 import org.alittlebitch.rocketmq.listener.OrderlyListener;
 import org.apache.rocketmq.client.ClientConfig;
 import org.apache.rocketmq.client.exception.MQClientException;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -17,12 +15,15 @@ import java.lang.reflect.Method;
  * @author ShawnShoper
  * @date 2018/9/3 15:38
  */
-@Component
 public class MQClientInstance {
-    @Autowired
+
     ClientConfig clientConfig;
-    @Autowired
     ConsumerProperties consumerProperties;
+
+    public MQClientInstance(ClientConfig clientConfig, ConsumerProperties consumerProperties) {
+        this.consumerProperties = consumerProperties;
+        this.clientConfig = clientConfig;
+    }
 
     public MQConsumer createInstance(Object bean, Method method, RocketMQListener rocketMQListener) throws MQClientException {
         String instance = StringUtils.isEmpty(rocketMQListener.instance()) ? clientConfig.getInstanceName() : rocketMQListener.instance();

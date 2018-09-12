@@ -1,6 +1,7 @@
 package org.alittlebitch.rocketmq.annotation;
 
-import org.alittlebitch.rocketmq.config.MQConfig;
+import org.alittlebitch.rocketmq.config.ContextConfig;
+import org.alittlebitch.rocketmq.config.RocketMQConfig;
 import org.springframework.context.annotation.Import;
 
 import java.lang.annotation.*;
@@ -11,7 +12,7 @@ import java.lang.annotation.*;
  */
 @Target(ElementType.TYPE)
 @Retention(RetentionPolicy.RUNTIME)
-@Import(MQConfig.class)
+@Import({RocketMQConfig.class, ContextConfig.class})
 @Documented
-public @interface EnableMQConfiguration {
+public @interface EnableRocketMQConfiguration {
 }
