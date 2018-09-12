@@ -20,6 +20,22 @@ public class ConcurrentlyListener extends Listener implements MessageListenerCon
 
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
-        return null;
+        if (msgs.isEmpty()) return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+        super.verify();
+        Class<?>[] paramTypes = super.extractParamType();
+        Object[] objects = super.assemblyData(paramTypes, msgs, context);
+        //if user defined the  return type,so return the user specify value
+        ConsumeConcurrentlyStatus consumeConcurrentlyStatus = null;
+        try {
+            Class<?> returnType = method.getReturnType();
+            if (returnType != Void.class) {
+                Object invoke = method.invoke(bean, objects);
+                consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return ConsumeConcurrentlyStatus.RECONSUME_LATER;
+        }
+        return consumeConcurrentlyStatus != null ? consumeConcurrentlyStatus : ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
     }
 }

@@ -5,6 +5,7 @@ import org.alittlebitch.rocketmq.config.ConsumerProperties;
 import org.apache.rocketmq.client.ClientConfig;
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.MessageListener;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
 import org.springframework.util.StringUtils;
 
@@ -32,7 +33,8 @@ public class MQConsumer {
         mqPushConsumer.setMessageListener(messageListener);
         return this;
     }
-    public MQConsumer config(ClientConfig clientConfig, ConsumerProperties consumerProperties, RocketMQListener rocketMQListener) {
+
+    public MQConsumer config(ClientConfig clientConfig, ConsumerProperties consumerProperties, RocketMQListener rocketMQListener) throws MQClientException {
         mqPushConsumer.setNamesrvAddr(StringUtils.isEmpty(clientConfig.getNamesrvAddr()) ? DEFAULT_NAME_SRV_ADDR : clientConfig.getNamesrvAddr());
         mqPushConsumer.setInstanceName(StringUtils.isEmpty(rocketMQListener.instance()) ? clientConfig.getInstanceName() : rocketMQListener.instance());
         mqPushConsumer.setConsumerGroup(StringUtils.isEmpty(rocketMQListener.group()) ? consumerProperties.getGroup() : rocketMQListener.group());
@@ -40,6 +42,7 @@ public class MQConsumer {
         mqPushConsumer.setConsumeMessageBatchMaxSize(consumerProperties.getConsumeMessageBatchMaxSize());
         mqPushConsumer.setConsumeConcurrentlyMaxSpan(consumerProperties.getConsumeConcurrentlyMaxSpan());
         mqPushConsumer.setAdjustThreadPoolNumsThreshold(consumerProperties.getAdjustThreadPoolNumsThreshold());
+        mqPushConsumer.subscribe(rocketMQListener.topic(), rocketMQListener.tags());
         if (consumerProperties.getConsumeThreadMax() >= 0)
             mqPushConsumer.setConsumeThreadMax(consumerProperties.getConsumeThreadMax());
         if (consumerProperties.getConsumeThreadMin() >= 0)
@@ -65,4 +68,7 @@ public class MQConsumer {
         mqPushConsumer.shutdown();
     }
 
+    public void start() throws MQClientException {
+        this.mqPushConsumer.start();
+    }
 }

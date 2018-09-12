@@ -2,7 +2,9 @@ package org.alittlebitch.rocketmq.factory;
 
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
 import org.alittlebitch.rocketmq.config.ConsumerProperties;
+import org.alittlebitch.rocketmq.exception.InstanceAlreadyRegistryException;
 import org.apache.rocketmq.client.ClientConfig;
+import org.apache.rocketmq.client.exception.MQClientException;
 
 import java.util.Map;
 import java.util.Objects;
@@ -18,15 +20,18 @@ public class MQClientFactory {
     protected static Map<String, MQConsumer> mqClients = new ConcurrentHashMap<>();
 
 
-    protected static MQConsumer get(String instanceId, ClientConfig clientConfig, ConsumerProperties consumerProperties, RocketMQListener rocketMQListener) {
+    public static MQConsumer registry(String instanceId, ClientConfig clientConfig, ConsumerProperties consumerProperties, RocketMQListener rocketMQListener) throws MQClientException {
+
         if (Objects.isNull(instanceId) || instanceId.trim().isEmpty())
             throw new NullPointerException("instanceId can not be null or empty.");
-        if (mqClients.containsKey(instanceId)) return mqClients.get(instanceId);
+
+        if (mqClients.containsKey(instanceId))
+            throw new InstanceAlreadyRegistryException("Instance " + instanceId + " is already reigstry,please check out and change the other one");
+
         MQConsumer defaultMQPushConsumer = MQConsumer.custom().config(clientConfig, consumerProperties, rocketMQListener);
         mqClients.putIfAbsent(instanceId, defaultMQPushConsumer);
         return defaultMQPushConsumer;
     }
-
 
     protected static void destory(String instanceId) {
         if (Objects.isNull(instanceId) || instanceId.trim().isEmpty())

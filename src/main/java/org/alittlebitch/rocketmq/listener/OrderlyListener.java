@@ -8,10 +8,6 @@ import org.apache.rocketmq.client.consumer.listener.MessageListenerOrderly;
 import org.apache.rocketmq.common.message.MessageExt;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
-import java.nio.charset.Charset;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -28,46 +24,19 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
     @Override
     public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
         if (msgs.isEmpty()) return ConsumeOrderlyStatus.SUCCESS;
-        MessageExt messageExt = msgs.get(0);
-        byte[] body = messageExt.getBody();
-        Class<?>[] parameterTypes = method.getParameterTypes();
-        //start of DI   提取参数类型,用于进行注入
-        Object[] objects = new Object[parameterTypes.length];
-        for (int i = 0; i < parameterTypes.length; i++) {
-            if (String.class == parameterTypes[i]) {
-                if (!msgs.isEmpty())
-                    objects[i] = new String(body, Charset.forName("UTF-8"));
-                continue;
-            }
-            if (ConsumeOrderlyContext.class == parameterTypes[i]) {
-                objects[i] = context;
-                continue;
-            }
-            if (List.class == parameterTypes[i]) {
-                Type[] genericParameterTypes = method.getGenericParameterTypes();
-                Type listType = genericParameterTypes[i];
-                ParameterizedType parameterizedType = (ParameterizedType) listType;
-                Type actualTypeArgument = parameterizedType.getActualTypeArguments()[0];
-                if ("class java.lang.String".equals(actualTypeArgument.getTypeName())) {
-                    List<String> messages = new ArrayList<>();
-                    for (MessageExt msg : msgs)
-                        messages.add(new String(msg.getBody(), Charset.forName("UTF-8")));
-                    objects[i] = messages;
-                    continue;
-                } else {
-                    logger.error("Method parameter " + parameterTypes[i] + " generics not support..");
-                }
-            }
-            objects[i] = null;
-        }
-        //end of DI
+        super.verify();
+        Class<?>[] paramTypes = super.extractParamType();
+        Object[] objects = super.assemblyData(paramTypes, msgs, context);
         //if user defined the return type,so return the user specify value
         ConsumeOrderlyStatus consumeOrderlyStatus = null;
         try {
             Class<?> returnType = method.getReturnType();
             if (returnType != Void.class) {
                 Object invoke = method.invoke(bean, objects);
-                consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
+                if (invoke instanceof ConsumeOrderlyStatus)
+                    consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
+                else
+                    throw new RuntimeException("Not support return type " + invoke.getClass().getName());
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -76,3 +45,38 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
         return consumeOrderlyStatus != null ? consumeOrderlyStatus : ConsumeOrderlyStatus.SUCCESS;
     }
 }
+
+
+//    Class<?>[] parameterTypes = method.getParameterTypes();
+//    //start of DI   提取参数类型,用于进行注入
+//    Object[] objects = new Object[parameterTypes.length];
+//        for (int i = 0; i < parameterTypes.length; i++) {
+//        if (String.class == parameterTypes[i]) {
+//        if (!msgs.isEmpty()) {
+//        MessageExt messageExt = msgs.get(0);
+//        byte[] body = messageExt.getBody();
+//        objects[i] = new String(body, Charset.forName("UTF-8"));
+//        continue;
+//        }
+//        }
+//        if (ConsumeOrderlyContext.class == parameterTypes[i]) {
+//        objects[i] = context;
+//        continue;
+//        }
+//        if (List.class == parameterTypes[i]) {
+//        Type[] genericParameterTypes = method.getGenericParameterTypes();
+//        Type listType = genericParameterTypes[i];
+//        ParameterizedType parameterizedType = (ParameterizedType) listType;
+//        Type actualTypeArgument = parameterizedType.getActualTypeArguments()[0];
+//        if ("class java.lang.String".equals(actualTypeArgument.getTypeName())) {
+//        List<String> messages = new ArrayList<>();
+//        for (MessageExt msg : msgs)
+//        messages.add(new String(msg.getBody(), Charset.forName("UTF-8")));
+//        objects[i] = messages;
+//        continue;
+//        } else {
+//        logger.error("Method parameter " + parameterTypes[i] + " generics not support..");
+//        }
+//        }
+//        objects[i] = null;
+//        }

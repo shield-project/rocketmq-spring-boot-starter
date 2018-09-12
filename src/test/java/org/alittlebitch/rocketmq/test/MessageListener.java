@@ -1,14 +1,8 @@
 package org.alittlebitch.rocketmq.test;
 
 import org.alittlebitch.rocketmq.annotation.RocketMQListener;
-import org.alittlebitch.rocketmq.handle.ConsumeStatus;
-import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.common.consumer.ConsumeFromWhere;
-import org.apache.rocketmq.common.message.MessageExt;
 import org.springframework.stereotype.Component;
-
-import java.io.UnsupportedEncodingException;
-import java.util.List;
 
 /**
  * @author ShawnShoper
@@ -16,15 +10,8 @@ import java.util.List;
  */
 @Component
 public class MessageListener {
-    @RocketMQListener(topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
-    public ConsumeStatus consumeMessage(List<MessageExt> msgs) {
-        try {
-            String message = new String(msgs.get(0).getBody(), "UTF-8");
-            System.out.println(new String(message) + System.currentTimeMillis());
-            return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.CONSUME_SUCCESS);
-        } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
-            return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.RECONSUME_LATER);
-        }
+    @RocketMQListener(instance = "testfor", topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
+    public void consumeMessage(String msgs) {
+        System.out.println(msgs + System.currentTimeMillis());
     }
 }
