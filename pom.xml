@@ -51,15 +51,15 @@
             <organization>a little bitch</organization>
         </developer>
     </developers>
-    W
 
-    <distributionManagement>
-        <snapshotRepository>
+
+    <repositories>
+        <repository>
             <id>aliyun</id>
             <name>aliyun</name>
             <url>https://maven.aliyun.com/repository/public</url>
-        </snapshotRepository>
-    </distributionManagement>
+        </repository>
+    </repositories>
     <build>
         <plugins>
             <plugin>

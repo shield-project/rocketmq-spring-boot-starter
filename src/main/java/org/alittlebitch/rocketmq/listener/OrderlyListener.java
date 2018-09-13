@@ -31,12 +31,14 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
         ConsumeOrderlyStatus consumeOrderlyStatus = null;
         try {
             Class<?> returnType = method.getReturnType();
-            if (returnType != Void.class) {
+            if (!returnType.getName().equals("void")) {
                 Object invoke = method.invoke(bean, objects);
                 if (invoke instanceof ConsumeOrderlyStatus)
                     consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
                 else
                     throw new RuntimeException("Not support return type " + invoke.getClass().getName());
+            } else {
+                method.invoke(bean, objects);
             }
         } catch (Exception e) {
             e.printStackTrace();
