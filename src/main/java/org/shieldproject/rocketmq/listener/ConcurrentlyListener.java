@@ -2,6 +2,7 @@ package org.shieldproject.rocketmq.listener;
 
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
+import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 
@@ -30,7 +31,10 @@ public class ConcurrentlyListener extends Listener implements MessageListenerCon
             Class<?> returnType = method.getReturnType();
             if (returnType != Void.class) {
                 Object invoke = method.invoke(bean, objects);
-                consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
+                if (invoke instanceof ConsumeOrderlyStatus)
+                    consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
+                else
+                    throw new RuntimeException("Not support return type " + invoke.getClass().getName());
             }
         } catch (Exception e) {
             e.printStackTrace();

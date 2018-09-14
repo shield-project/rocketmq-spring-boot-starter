@@ -2,6 +2,7 @@ package org.shieldproject.rocketmq.listener;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
 import org.apache.rocketmq.common.message.MessageExt;
 
@@ -17,9 +18,10 @@ import java.util.List;
  * @date 2018/9/10 18:08
  */
 public abstract class Listener {
+    private static final Log logger = LogFactory.getLog(OrderlyListener.class);
     protected Object bean;
     protected Method method;
-    private static final Log logger = LogFactory.getLog(OrderlyListener.class);
+
     public Listener(Object bean, Method method) {
         this.bean = bean;
         this.method = method;
@@ -38,14 +40,10 @@ public abstract class Listener {
                     MessageExt messageExt = msgs.get(0);
                     byte[] body = messageExt.getBody();
                     objects[i] = new String(body, Charset.forName("UTF-8"));
-                    continue;
                 }
-            }
-            if (ConsumeOrderlyContext.class == paramTypes[i]) {
+            } else if (ConsumeOrderlyContext.class == paramTypes[i] || ConsumeConcurrentlyContext.class == paramTypes[i])
                 objects[i] = context;
-                continue;
-            }
-            if (List.class == paramTypes[i]) {
+            else if (List.class == paramTypes[i]) {
                 Type[] genericParameterTypes = method.getGenericParameterTypes();
                 Type listType = genericParameterTypes[i];
                 ParameterizedType parameterizedType = (ParameterizedType) listType;
@@ -55,12 +53,12 @@ public abstract class Listener {
                     for (MessageExt msg : msgs)
                         messages.add(new String(msg.getBody(), Charset.forName("UTF-8")));
                     objects[i] = messages;
-                    continue;
                 } else {
                     logger.error("Method parameter " + paramTypes[i] + " generics not support..");
                 }
+            } else {
+                objects[i] = null;
             }
-            objects[i] = null;
         }
         return objects;
     }

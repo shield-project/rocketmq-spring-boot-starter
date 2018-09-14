@@ -35,8 +35,6 @@ rocketmq-spring-boot-starter 2.0.0-RELEASE
 	      config:
 	        namesrv-addr: 192.168.2.26:9876
 	        instance-name: test
-	      consumer:
-	        group: testGroup
 ```
 config配置可以参考rocketMQ自带的config配置进行补充。
 
@@ -54,9 +52,28 @@ config配置可以参考rocketMQ自带的config配置进行补充。
 	}
 ```
 
+* 配置MQConsumer listener
 
+方法参数选配：
+*   String msg  注入单条消息，produce发送的单条消息
+*   List\<String\> msgs   注入多条消息，produce发送的是多条消息
+*   ConsumeConcurrentlyContext  注入ConsumeConcurrentlyContext如果当前消费模式是Concurrently
+*   ConsumeOrderlyContext   注入ConsumeConcurrentlyContext如果当前消费模式是Concurrently
 
+返回值选配
+*   void    如果无需处理事务回滚操作(自动处理事务)
+*   ConsumeConcurrentlyStatus   如果消费模式是concurrently
+*   ConsumeOrderlyStatus        如果消费模式是Orderly
+
+```java
+    @RocketMQListener(instance = "testfor1",
+            topic = "test", tags = "test",
+            consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
+    public void consumeMessage(String msgs) {
+        System.out.println(msgs + System.currentTimeMillis());
+    }
 ```
+
 * 注入MessageProducer
 
 ```java
