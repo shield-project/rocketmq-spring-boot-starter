@@ -54,7 +54,7 @@ config配置可以参考rocketMQ自带的config配置进行补充。
 
 * 配置MQConsumer listener
 
-方法参数选配：
+方法参数选配：框架自动识别参数进行注入
 *   String msg  注入单条消息，produce发送的单条消息
 *   List\<String\> msgs   注入多条消息，produce发送的是多条消息
 *   ConsumeConcurrentlyContext  注入ConsumeConcurrentlyContext如果当前消费模式是Concurrently
