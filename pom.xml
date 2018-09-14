@@ -3,9 +3,9 @@
          xmlns="http://maven.apache.org/POM/4.0.0"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>org.shieldproject.mq</groupId>
+    <groupId>org.shieldproject.rocketmq</groupId>
     <artifactId>rocketmq-spring-boot-starter</artifactId>
-    <version>1.0.0-RELEASE</version>
+    <version>2.0.0-RELEASE</version>
     <packaging>jar</packaging>
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -48,7 +48,7 @@
         <developer>
             <name>shawnshoper</name>
             <email>xiehao3692@vip.qq.com</email>
-            <organization>a little bitch</organization>
+            <organization>shield-project</organization>
         </developer>
     </developers>
 

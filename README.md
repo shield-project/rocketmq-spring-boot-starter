@@ -1,4 +1,4 @@
-rocketmq-spring-boot-starter
+rocketmq-spring-boot-starter 2.0.0-RELEASE
 ===================================
 
 [chinese](https://github.com/shieldproject/rocketmq-spring-boot-starter/blob/master/README.md)
@@ -20,9 +20,9 @@ rocketmq-spring-boot-starter
 
 ```xml
     <dependency>
-        <groupId>org.shieldproject.mq</groupId>
+        <groupId>org.shieldproject.rocketmq</groupId>
         <artifactId>rocketmq-spring-boot-starter</artifactId>
-        <version>1.0.0</version>
+        <version>2.0.0-RELEASE</version>
     </dependency>
 ```
 
@@ -46,7 +46,7 @@ config配置可以参考rocketMQ自带的config配置进行补充。
 
 ```java
 	@SpringBootApplication
-	@EnableMQConfiguration
+	@EnableRocketMQConfiguration
 	public class Application {
 	    public static void main(String[] args) {
 	        SpringApplication.run(Application.class, args);
@@ -54,46 +54,7 @@ config配置可以参考rocketMQ自带的config配置进行补充。
 	}
 ```
 
-* 启动Message监听
 
- 实现AbstractMessageListener接口,并指定泛型类型用于指定消费处理器
-
-根据rocketmq内置的
-
-<b>ConsumeOrderlyContext</b>
-
-<b>ConsumeConcurrentlyContext</b>
-
-提供了2种封装
-
-<b>ConsumeContextConcurrently</b>
-
-<b>ConsumeContextOrderly</b>
-
-通过指定不同泛型在consumeMessage方法中对应的context，以及返回值ConsumeStatus有所改变.
-如果是ConsumeContextConcurrently返回值因是如下demo示例，如是Orderly则ConsumeStatus.custom().setConsumeOrderlyStatus
-
-```java
-	/**
-	 * @author ShawnShoper
-	 * @date 2018/7/30 11:34
-	 */
-	@Component
-	public class MessageListener extends AbstractMessageListener<ConsumeContextConcurrently> {
-	    @Override
-	    @ConsumerConfig(topic = "test", tags = "test", consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
-	    public ConsumeStatus consumeMessage(List<MessageExt> msgs, ConsumeContextConcurrently context) {
-	        try {
-	            String message = new String(msgs.get(0).getBody(), "UTF-8");
-	            System.out.println(new String(message)+System.currentTimeMillis());
-	            return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.CONSUME_SUCCESS);
-	        } catch (UnsupportedEncodingException e) {
-	            System.out.println(".........");
-	            e.printStackTrace();
-	            return ConsumeStatus.custom().setConsumeConcurrentlyStatus(ConsumeConcurrentlyStatus.RECONSUME_LATER);
-	        }
-	    }
-	}
 
 ```
 * 注入MessageProducer
