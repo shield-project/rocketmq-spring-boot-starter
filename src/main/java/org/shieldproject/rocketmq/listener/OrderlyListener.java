@@ -47,38 +47,3 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
         return consumeOrderlyStatus != null ? consumeOrderlyStatus : ConsumeOrderlyStatus.SUCCESS;
     }
 }
-
-
-//    Class<?>[] parameterTypes = method.getParameterTypes();
-//    //start of DI   提取参数类型,用于进行注入
-//    Object[] objects = new Object[parameterTypes.length];
-//        for (int i = 0; i < parameterTypes.length; i++) {
-//        if (String.class == parameterTypes[i]) {
-//        if (!msgs.isEmpty()) {
-//        MessageExt messageExt = msgs.get(0);
-//        byte[] body = messageExt.getBody();
-//        objects[i] = new String(body, Charset.forName("UTF-8"));
-//        continue;
-//        }
-//        }
-//        if (ConsumeOrderlyContext.class == parameterTypes[i]) {
-//        objects[i] = context;
-//        continue;
-//        }
-//        if (List.class == parameterTypes[i]) {
-//        Type[] genericParameterTypes = method.getGenericParameterTypes();
-//        Type listType = genericParameterTypes[i];
-//        ParameterizedType parameterizedType = (ParameterizedType) listType;
-//        Type actualTypeArgument = parameterizedType.getActualTypeArguments()[0];
-//        if ("class java.lang.String".equals(actualTypeArgument.getTypeName())) {
-//        List<String> messages = new ArrayList<>();
-//        for (MessageExt msg : msgs)
-//        messages.add(new String(msg.getBody(), Charset.forName("UTF-8")));
-//        objects[i] = messages;
-//        continue;
-//        } else {
-//        logger.error("Method parameter " + parameterTypes[i] + " generics not support..");
-//        }
-//        }
-//        objects[i] = null;
-//        }

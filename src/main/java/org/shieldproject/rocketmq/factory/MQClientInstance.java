@@ -1,12 +1,12 @@
 package org.shieldproject.rocketmq.factory;
 
+import org.apache.rocketmq.client.ClientConfig;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.shieldproject.rocketmq.annotation.ConsumeContext;
 import org.shieldproject.rocketmq.annotation.RocketMQListener;
 import org.shieldproject.rocketmq.config.ConsumerProperties;
 import org.shieldproject.rocketmq.listener.ConcurrentlyListener;
 import org.shieldproject.rocketmq.listener.OrderlyListener;
-import org.apache.rocketmq.client.ClientConfig;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.util.StringUtils;
 
 import java.lang.reflect.Method;
@@ -37,10 +37,6 @@ public class MQClientInstance {
             defaultMQPushConsumer.listener(new ConcurrentlyListener(bean, method));
         else
             throw new RuntimeException("ConsumeContext not support now.. [" + rocketMQListener.consumeContext().name() + "]");
-//        defaultMQPushConsumer.setInstanceName(instance);
-//        if (!StringUtils.isEmpty(rocketMQListener.group()))
-//            defaultMQPushConsumer.setConsumerGroup(rocketMQListener.group());
-//        defaultMQPushConsumer.sub();
         return defaultMQPushConsumer;
     }
 }

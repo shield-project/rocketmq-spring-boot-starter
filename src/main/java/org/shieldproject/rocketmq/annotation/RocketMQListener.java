@@ -51,7 +51,4 @@ public @interface RocketMQListener {
 
     ConsumeContext consumeContext() default ConsumeContext.Orderly;
 
-
-//    //    boolean autoCommit() default true;
-//    ConsumeMode consumeMode() default ConsumeMode.CONCURRENTLY;
 }
