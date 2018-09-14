@@ -3,6 +3,10 @@ rocketmq-spring-boot-starter 2.0.0-RELEASE
 
 
 [![Build Status](https://www.travis-ci.org/shield-project/rocketmq-spring-boot-starter.svg?branch=master)](https://www.travis-ci.org/shield-project/rocketmq-spring-boot-starter)
+[![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=bugs)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
+[![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=ncloc)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
+[![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=security_rating)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
+
 ### Features
 1.  优化用户使用，去掉必须实现的接口以及方法
 2.  用户自定义方法，实现动态参数注入
