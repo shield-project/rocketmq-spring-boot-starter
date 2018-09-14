@@ -43,4 +43,7 @@ public class MQClientFactory {
             defaultMQPushConsumer.shutdown();
     }
 
+    public static void destoryAll() {
+        mqClients.keySet().forEach(MQClientFactory::destory);
+    }
 }

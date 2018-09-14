@@ -26,7 +26,6 @@ public class RocketMQConfig {
     public MQProducer mqProducer() throws MQClientException {
 
         ProducerProperties producerProperties = mqProperties.getProducer();
-
         // default producer
         DefaultMQProducer defaultMQProducer = new DefaultMQProducer();
 
@@ -39,9 +38,7 @@ public class RocketMQConfig {
         defaultMQProducer.setMaxMessageSize(producerProperties.getMaxMessageSize());
         defaultMQProducer.setRetryAnotherBrokerWhenNotStoreOK(producerProperties.isRetryAnotherBrokerWhenNotStoreOK());
         defaultMQProducer.setRetryTimesWhenSendAsyncFailed(producerProperties.getRetryTimesWhenSendAsyncFailed());
-
         defaultMQProducer.start();
-
         return defaultMQProducer;
 
     }
@@ -50,27 +47,4 @@ public class RocketMQConfig {
     public MQClientInstance mqClientInstance() {
         return new MQClientInstance(mqProperties.getConfig(), mqProperties.getConsumer());
     }
-
-//    @Bean
-//    @ConditionalOnMissingBean(DefaultMQPushConsumer.class)
-//    public DefaultMQPushConsumer mqConsumer() {
-//
-//        // default consumer
-//        DefaultMQPushConsumer mqConsumer = new DefaultMQPushConsumer();
-//
-//        mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
-//        mqConsumer.setConsumeFromWhere(mqProperties.getConsumer().getConsumeFromWhere());
-//        mqConsumer.setConsumerGroup(mqProperties.getConsumer().getGroup());
-////        mqConsumer.subscribe("test", "test");
-////        mqConsumer.subscribe(consumerConfigProperty.getTopic(), consumerConfigProperty.getTags());
-////        mqConsumer.setNamesrvAddr(mqProperties.getConfig().getNamesrvAddr());
-////        ConsumerProperties consumerProperties = mqProperties.getConsumer();
-////        mqConsumer.setConsumerGroup(consumerProperties.getGroup());
-////        mqConsumer.setAdjustThreadPoolNumsThreshold(consumerProperties.getAdjustThreadPoolNumsThreshold());
-////        mqConsumer.setConsumeConcurrentlyMaxSpan(consumerProperties.getConsumeConcurrentlyMaxSpan());
-////        mqConsumer.setConsumeFromWhere(consumerConfigProperty.getConsumeFromWhere());
-////        mqConsumer.setConsumeMessageBatchMaxSize(consumerProperties.getConsumeMessageBatchMaxSize());
-//
-//        return mqConsumer;
-//    }
 }
