@@ -1,4 +1,5 @@
 language: java
 sudo: enabled
 os: window
-jdk:  - oraclejdk8
+jdk:
+- oraclejdk8
