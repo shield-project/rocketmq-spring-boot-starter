@@ -46,13 +46,13 @@ public class RocketMQContextListener implements BeanPostProcessor {
      * @param method
      * @return
      */
-//    private Collection<RocketMQListener> findListenerAnnotations(Class<?> clazz) {
-//        Set<RocketMQListener> listeners = new HashSet<>();
-//        RocketMQListener ann = AnnotationUtils.findAnnotation(clazz, RocketMQListener.class);
-//        if (Objects.nonNull(ann))
-//            listeners.add(ann);
-//        return listeners;
-//    }
+/*    private Collection<RocketMQListener> findListenerAnnotations(Class<?> clazz) {
+        Set<RocketMQListener> listeners = new HashSet<>();
+        RocketMQListener ann = AnnotationUtils.findAnnotation(clazz, RocketMQListener.class);
+        if (Objects.nonNull(ann))
+            listeners.add(ann);
+        return listeners;
+    }*/
 
     /**
      * find from method header with annotations
