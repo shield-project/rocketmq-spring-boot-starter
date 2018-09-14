@@ -7,7 +7,7 @@ rocketmq-spring-boot-starter 2.0.0-RELEASE
 3.  重构代码
 
 
-[chinese](https://github.com/shieldproject/rocketmq-spring-boot-starter/blob/master/README.md)
+[chinese](https://github.com/shield-project/rocketmq-spring-boot-starter/blob/master/README.md)
 
 * 支持jdk版本为1.8
 * SpringBoot版本为1.5.6
