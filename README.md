@@ -72,11 +72,14 @@ config配置可以参考rocketMQ自带的config配置进行补充。
 *   ConsumeOrderlyStatus        如果消费模式是Orderly
 
 ```java
-    @RocketMQListener(instance = "testfor1",
-            topic = "test", tags = "test",
-            consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
-    public void consumeMessage(String msgs) {
-        System.out.println(msgs + System.currentTimeMillis());
+    @Component
+    public class MessageListener {
+        @RocketMQListener(instance = "testfor1",
+                topic = "test", tags = "test",
+                consumeFromWhere = ConsumeFromWhere.CONSUME_FROM_LAST_OFFSET)
+        public void consumeMessage(String msgs) {
+            System.out.println(msgs + System.currentTimeMillis());
+        }
     }
 ```
 
