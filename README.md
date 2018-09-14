@@ -2,6 +2,10 @@ rocketmq-spring-boot-starter 2.0.0-RELEASE
 ===================================
 
 [![Build Status](https://www.travis-ci.org/shield-project/rocketmq-spring-boot-starter.svg?branch=master)](https://www.travis-ci.org/shield-project/rocketmq-spring-boot-starter)
+
+[![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=alert_status)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
+
+
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=bugs)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=ncloc)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)
 [![Build Status](https://sonarcloud.io/api/project_badges/measure?project=rocketmq-spring-boot-starter&metric=security_rating)](https://sonarcloud.io/dashboard?id=rocketmq-spring-boot-starter)

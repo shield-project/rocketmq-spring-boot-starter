@@ -1,4 +1,4 @@
-package org.alittlebitch.rocketmq.test;
+package org.shieldproject.rocketmq.test;
 
 import org.apache.rocketmq.client.exception.MQBrokerException;
 import org.apache.rocketmq.client.exception.MQClientException;
