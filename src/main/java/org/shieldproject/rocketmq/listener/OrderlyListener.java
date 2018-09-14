@@ -31,7 +31,8 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
         ConsumeOrderlyStatus consumeOrderlyStatus = null;
         try {
             Class<?> returnType = method.getReturnType();
-            if (!returnType.getName().equals("void")) {
+            System.out.println(returnType);
+            if (!"void".equals(returnType.getName())) {
                 Object invoke = method.invoke(bean, objects);
                 if (invoke instanceof ConsumeOrderlyStatus)
                     consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
