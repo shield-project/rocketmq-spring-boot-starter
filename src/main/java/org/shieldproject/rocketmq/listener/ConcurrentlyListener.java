@@ -22,9 +22,7 @@ public class ConcurrentlyListener extends Listener implements MessageListenerCon
     @Override
     public ConsumeConcurrentlyStatus consumeMessage(List<MessageExt> msgs, ConsumeConcurrentlyContext context) {
         if (msgs.isEmpty()) return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
-        super.verify();
-        Class<?>[] paramTypes = super.extractParamType();
-        Object[] objects = super.assemblyData(paramTypes, msgs, context);
+        Object[] objects = super.assemblyData(msgs, context);
         //if user defined the  return type,so return the user specify value
         ConsumeConcurrentlyStatus consumeConcurrentlyStatus = null;
         try {

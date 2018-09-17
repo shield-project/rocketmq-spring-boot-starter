@@ -24,9 +24,8 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
     @Override
     public ConsumeOrderlyStatus consumeMessage(List<MessageExt> msgs, ConsumeOrderlyContext context) {
         if (msgs.isEmpty()) return ConsumeOrderlyStatus.SUCCESS;
-        super.verify();
-        Class<?>[] paramTypes = super.extractParamType();
-        Object[] objects = super.assemblyData(paramTypes, msgs, context);
+
+        Object[] objects = super.assemblyData(msgs, context);
         //if user defined the return type,so return the user specify value
         ConsumeOrderlyStatus consumeOrderlyStatus = null;
         try {
