@@ -27,7 +27,7 @@ public class ConcurrentlyListener extends Listener implements MessageListenerCon
         ConsumeConcurrentlyStatus consumeConcurrentlyStatus = null;
         try {
             Class<?> returnType = method.getReturnType();
-            if (!"void".equals(returnType.getName())) {
+            if (!returnType.isAssignableFrom(Void.TYPE)) {
                 Object invoke = method.invoke(bean, objects);
                 if (invoke instanceof ConsumeOrderlyStatus)
                     consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
