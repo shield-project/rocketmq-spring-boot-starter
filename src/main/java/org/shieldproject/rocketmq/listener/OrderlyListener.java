@@ -32,10 +32,7 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
             Class<?> returnType = method.getReturnType();
             if (!returnType.isAssignableFrom(Void.TYPE)) {
                 Object invoke = method.invoke(bean, objects);
-                if (invoke instanceof ConsumeOrderlyStatus)
-                    consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
-                else
-                    throw new RuntimeException("Not support return type " + invoke.getClass().getName());
+                consumeOrderlyStatus = (ConsumeOrderlyStatus) invoke;
             } else {
                 method.invoke(bean, objects);
             }

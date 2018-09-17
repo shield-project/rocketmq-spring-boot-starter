@@ -4,7 +4,6 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
-import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.client.consumer.listener.MessageListenerConcurrently;
 import org.apache.rocketmq.common.message.MessageExt;
 
@@ -32,10 +31,7 @@ public class ConcurrentlyListener extends Listener implements MessageListenerCon
             Class<?> returnType = method.getReturnType();
             if (!returnType.isAssignableFrom(Void.TYPE)) {
                 Object invoke = method.invoke(bean, objects);
-                if (invoke instanceof ConsumeOrderlyStatus)
-                    consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
-                else
-                    throw new RuntimeException("Not support return type " + invoke.getClass().getName());
+                consumeConcurrentlyStatus = (ConsumeConcurrentlyStatus) invoke;
             }
         } catch (Exception e) {
             logger.error("Receive message failed", e);

@@ -3,8 +3,11 @@ package org.shieldproject.rocketmq.listener;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeConcurrentlyStatus;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
+import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyStatus;
 import org.apache.rocketmq.common.message.MessageExt;
+import org.shieldproject.rocketmq.exception.ReturnTypeNotSupportException;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
@@ -33,6 +36,17 @@ public abstract class Listener {
     protected void verify() {
         if (method.getParameterCount() <= 0)
             throw new RuntimeException("RocketMQListener method [" + method.getName() + "] has no parameters");
+        Class<?> returnType = method.getReturnType();
+        boolean flagErr = false;
+        if (this instanceof ConcurrentlyListener) {
+            if (!returnType.isAssignableFrom(ConsumeConcurrentlyStatus.class) && !returnType.isAssignableFrom(Void.TYPE))
+                flagErr = true;
+        } else if (this instanceof OrderlyListener) {
+            if (!returnType.isAssignableFrom(ConsumeOrderlyStatus.class) && !returnType.isAssignableFrom(Void.TYPE))
+                flagErr = true;
+        }
+        if (flagErr)
+            throw new ReturnTypeNotSupportException("Return type " + returnType.getName() + " not support");
     }
 
     protected Object[] assemblyData(List<MessageExt> msgs, Object context) {//ConsumeOrderlyContext
