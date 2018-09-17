@@ -1,11 +1,13 @@
 package org.shieldproject.rocketmq.config;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.rocketmq.client.exception.MQClientException;
 import org.shieldproject.rocketmq.annotation.RocketMQListener;
 import org.shieldproject.rocketmq.context.RocketMQMappingStore;
 import org.shieldproject.rocketmq.factory.MQClientInstance;
 import org.shieldproject.rocketmq.factory.MQConsumer;
 import org.shieldproject.rocketmq.factory.RocketMQMappingBean;
-import org.apache.rocketmq.client.exception.MQClientException;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -22,6 +24,8 @@ import java.util.List;
  * @date 2018/8/30 15:04
  */
 public class RocketMQContextRefreshedListener implements ApplicationListener<ContextRefreshedEvent>, ApplicationContextAware {
+
+    private static final Log logger = LogFactory.getLog(RocketMQContextRefreshedListener.class);
     ApplicationContext applicationContext;
 
     @Override
@@ -37,7 +41,7 @@ public class RocketMQContextRefreshedListener implements ApplicationListener<Con
                 MQConsumer mqConsumer = mqClientInstance.createInstance(bean, method, rocketMQListener);
                 mqConsumer.start();
             } catch (MQClientException e1) {
-                e1.printStackTrace();
+                logger.error("Failed Start mq client", e1);
             }
         });
     }

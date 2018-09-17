@@ -40,7 +40,7 @@ public class OrderlyListener extends Listener implements MessageListenerOrderly 
                 method.invoke(bean, objects);
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error("Receive message failed", e);
             return ConsumeOrderlyStatus.SUSPEND_CURRENT_QUEUE_A_MOMENT;
         }
         return consumeOrderlyStatus != null ? consumeOrderlyStatus : ConsumeOrderlyStatus.SUCCESS;
