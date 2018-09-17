@@ -21,10 +21,13 @@ public abstract class Listener {
     private static final Log logger = LogFactory.getLog(OrderlyListener.class);
     protected Object bean;
     protected Method method;
+    Class<?>[] paramTypes;
 
     public Listener(Object bean, Method method) {
         this.bean = bean;
         this.method = method;
+        verify();
+        paramTypes = extractParamType();
     }
 
     protected void verify() {
@@ -32,7 +35,7 @@ public abstract class Listener {
             throw new RuntimeException("RocketMQListener method [" + method.getName() + "] has no parameters");
     }
 
-    protected Object[] assemblyData(Class<?>[] paramTypes, List<MessageExt> msgs, Object context) {//ConsumeOrderlyContext
+    protected Object[] assemblyData(List<MessageExt> msgs, Object context) {//ConsumeOrderlyContext
         Object[] objects = new Object[paramTypes.length];
         for (int i = 0; i < paramTypes.length; i++) {
             if (String.class == paramTypes[i]) {
