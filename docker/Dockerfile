@@ -9,9 +9,6 @@ LABEL author="shawnshoper"
 LABEL email="xiehao3692@vip.qq.com"
 LABEL github-url="https://github.com/shield-project/rocketmq-spring-boot-starter"
 
-
-
-
 # config docker rocketmq arguments
 ARG ROCKETMQ_LOG_PATH=/opt/rocketmq/logs
 ARG ROCKETMQ_STORE_PATH=/opt/rocketmq/store
