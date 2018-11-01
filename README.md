@@ -10,8 +10,11 @@ rocketmq-spring-boot-starter 2.0.0-RELEASE
 ### Features
 
 # 2.0.1
-1.添加RockemtMQ docker环境镜像。
-2. developing
+
+1.  添加RockemtMQ docker环境镜像。
+
+2.  developing
+
 # 2.0.0
 1.  优化用户使用，去掉必须实现的接口以及方法
 2.  用户自定义方法，实现动态参数注入
