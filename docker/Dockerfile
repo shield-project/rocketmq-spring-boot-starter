@@ -1,0 +1,3 @@
+FROM java:8
+
+ENV ROCKETMQ_VERSION "4.3.0"
