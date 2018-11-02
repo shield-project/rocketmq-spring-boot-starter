@@ -2,12 +2,16 @@
 FROM java:8
 
 # Rocket version
-ENV ROCKETMQ_VERSION "${ROCKETMQ_VERSION}"
+ENV ROCKETMQ_VERSION "4.3.0"
+
+MAINTAINER "Shield Team"
 LABEL name="rocketmq-base"
-LABEL tag="1.0"
-LABEL author="shawnshoper"
+LABEL version="2.0.1"
+LABEL team="shield"
 LABEL email="xiehao3692@vip.qq.com"
-LABEL github-url="https://github.com/shield-project/rocketmq-spring-boot-starter"
+LABEL project-url="https://github.com/shield-project/rocketmq-spring-boot-starter"
+LABEL github-url="https://github.com/"
+
 
 # config docker rocketmq arguments
 ARG ROCKETMQ_LOG_PATH=/opt/rocketmq/logs
@@ -22,8 +26,7 @@ RUN rm -rf /etc/localtime \
 
 # install rocketmq
 RUN cd /opt \
-    && curl http://mirror.bit.edu.cn/apache/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-#{ROCKETMQ_VERSION}-bin-release.zip -o  rocketmq-all-${ROCKETMQ_VERSION}.zip \
-    && mkdir -p ${ROCKETMQ_HOME} \
+    && curl http://mirror.bit.edu.cn/apache/rocketmq/${ROCKETMQ_VERSION}/rocketmq-all-${ROCKETMQ_VERSION}-bin-release.zip -o  rocketmq-all-${ROCKETMQ_VERSION}.zip \
     && unzip -d ${ROCKETMQ_HOME} rocketmq-all-${ROCKETMQ_VERSION}.zip \
     && rm -fr rocketmq-all-${ROCKETMQ_VERSION}.zip \
     && cd ${ROCKETMQ_HOME} \
