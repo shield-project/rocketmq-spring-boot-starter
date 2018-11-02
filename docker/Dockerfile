@@ -13,11 +13,10 @@ LABEL project-url="https://github.com/shield-project/rocketmq-spring-boot-starte
 LABEL github-url="https://github.com/"
 
 
-# config docker rocketmq arguments
-ARG ROCKETMQ_LOG_PATH=/opt/rocketmq/logs
-ARG ROCKETMQ_STORE_PATH=/opt/rocketmq/store
-
-# Rocket home path
+# config docker rocketmq ENV
+ENV ROCKETMQ_LOG_PATH=/opt/rocketmq/logs
+ENV ROCKETMQ_STORE_PATH=/opt/rocketmq/store
+ENV ROCKETMQ_CONF_PATH=/opt/rocketmq/config
 ENV ROCKETMQ_HOME  /rocketmq-${ROCKETMQ_VERSION}
 
 #tme zone
@@ -38,11 +37,15 @@ WORKDIR  ${ROCKETMQ_HOME}
 
 # create rocketmq data dir and log dir
 RUN mkdir -p \
- $ROCKETMQ_LOG_PATH \
- $ROCKETMQ_STORE_PATH
+    ${ROCKETMQ_LOG_PATH} \
+    ${ROCKETMQ_STORE_PATH} \
+    ${ROCKETMQ_CONF_PATH} \
 
-# copy rocketmq script to rocketmq bin directory
-COPY script/* ${ROCKETMQ_HOME}/bin
+
+
+# copy rocketmq script and default conf to rocketmq bin directory
+COPY script/* ${ROCKETMQ_HOME}/bin/
+COPY conf/* ${ROCKETMQ_HOME}/conf/
 
 # link rocketmq bin file and copy config file
 RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
@@ -54,6 +57,9 @@ RUN chmod -R +x ${ROCKETMQ_HOME}/bin/* \
     && ln -s ${ROCKETMQ_HOME}/bin/mqnamesrv /usr/local/bin/mqnamesrv \
     && ln -s ${ROCKETMQ_HOME}/bin/mqbroker /usr/local/bin/mqbroker
 
-# set docker volume
-VOLUME $ROCKETMQ_LOG_PATH $ROCKETMQ_STORE_PATH
+#copy rocketmq conf to conf dir.
+RUN mkdir -p ${ROCKETMQ_CONF_PATH} \
+    && cp -rf conf/* ${ROCKETMQ_CONF_PATH}/
 
+# set docker volume
+VOLUME ${ROCKETMQ_LOG_PATH} ${ROCKETMQ_STORE_PATH}
