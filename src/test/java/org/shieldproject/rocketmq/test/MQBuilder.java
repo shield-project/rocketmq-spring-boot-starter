@@ -1,4 +1,4 @@
-package org.alittlebitch.rocketmq.test;
+package org.shieldproject.rocketmq.test;
 
 import org.apache.rocketmq.client.consumer.DefaultMQPushConsumer;
 import org.apache.rocketmq.client.consumer.listener.ConsumeOrderlyContext;
